@@ -341,14 +341,15 @@ display_results = function(){
 		}
 	}
 	cols.forEach(bg_set);
-	if (combo == "Colorless"){
+	if (combo == "WUBRG"){
 		$("#form").css("background", "linear-gradient(#ffffff, #8080ff, #808080, #ff8080, #80ff80)")
-	}
-	if (bg.length > 1){
-		$("#form").css("background", "linear-gradient(" + bg.join() + ")");
 	} else {
-		$("#form").css("background", bg.join());
-	}
+        if (bg.length > 1){
+            $("#form").css("background", "linear-gradient(" + bg.join() + ")");
+        } else {
+            $("#form").css("background", bg.join());
+        }
+    }
 	if (combo == "Colorless"){
 		$("#form").css("background", "#e0e0e0");
 	}
