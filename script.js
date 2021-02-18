@@ -333,7 +333,6 @@ display_results = function(){
 		}
 	}
 	var combo = combos[cols.join("")];
-    console.log(col_diffs);
 	if (cols.length == 0 || cols.length == 5 || col_diffs[max_gap] < 3){
 		if (cutoff < 11){
 			combo = "Colorless";
