@@ -120,7 +120,7 @@ var qtext = `[
             "low": "G"
         },
         {
-            "question": "It's not as important to me that my group is healthy and stable, as long as the final product meets my standards.",
+            "question": "When criticising someone's work, it's important to point out the flaws, even at the expense of their feelings.",
             "high": "U",
             "low": "W"
         },
@@ -280,17 +280,31 @@ wrap_fill = function(){
 };
 
 
+
 form_fill = function(i){
-	$("form").html(`<label for="form">` + questions[i]["question"] + `</label>
-		<div>
-			<span><input type="radio" name="form" value="1">Strongly Disagree</input></span>
-			<span><input type="radio" name="form" value="2">Disagree</input></span>
-			<span><input type="radio" name="form" value="3">Ambivalent</input></span>
-			<span><input type="radio" name="form" value="4">Agree</input></span>
-			<span><input type="radio" name="form" value="5">Strongly Agree</input></span>
-			<span class="dontcare"><input type="radio" name="form" value="0" checked="checked" required="required">Don't care</input></span>
-		</div>
-		<input type="button" class="button" value="Next" onclick="wrap_fill()"> `)
+    var btn_class
+    if ($(document).width() > 640){
+        btn_class="btn-group"
+    } else {
+        btn_class="btn-group-vertical"
+    }
+	$("form").html(`<h2 class="fs-6 mb-4">` + questions[i]["question"] + `</h2>
+<div class="`+ btn_class + `" role="group" aria-label="Likert Scale">
+  <input type="radio" class="btn-check" name="form" id="1" value="1" autocomplete="off">
+  <label class="btn btn-outline-primary" for="1">Strongly Disagree</label>
+
+  <input type="radio" class="btn-check" name="form" id="2" value="2" autocomplete="off">
+  <label class="btn btn-outline-primary" for="2">Disagree</label>
+
+  <input type="radio" class="btn-check" name="form" id="3" value="3" autocomplete="off">
+  <label class="btn btn-outline-primary" for="3">Ambivalent</label>
+  <input type="radio" class="btn-check" name="form" id="4" value="4" autocomplete="off">
+  <label class="btn btn-outline-primary" for="4">Agree</label>
+  <input type="radio" class="btn-check" name="form" id="5" value="5" autocomplete="off">
+  <label class="btn btn-outline-primary" for="5">Strongly Agree</label>
+  <input type="radio" class="btn-check" name="form" id="0" value="0" autocomplete="off" checked>
+  <label class="btn btn-outline-primary" for="0">Don't Care</label>
+</div><input type="button" class="btn btn-primary my-4" value="Next" onclick="wrap_fill()"> `)
 };
 
 bg_set = function(value){
@@ -317,29 +331,29 @@ display_results = function(){
 		if (col_array[i] >= cutoff){
 			cols.push(color_names[i]);
 		}
-	}
+	}n
 	var combo = combos[cols.join("")];
-	if (cols.length == 0 || cols.length == 5){
-		if (cutoff <= 10){
+	if (cols.length == 0 || cols.length == 5 || max_gap < 3){
+		if (cutoff < 11){
 			combo = "Colorless";
-		} else {
+		} else {n
 			combo = "WUBRG";
 		}
 	}
 	cols.forEach(bg_set);
 	if (bg.length > 1){
-		$("form").css("background", "linear-gradient(" + bg.join() + ")");
+		$("#form").css("background", "linear-gradient(" + bg.join() + ")");
 	} else {
-		$("form").css("background", bg.join());
+		$("#form").css("background", bg.join());
 	}
 	if (combo == "Colorless"){
-		$("form").css("background", "#e0e0e0");
+		$("#form").css("background", "#e0e0e0");
 	}
-	$("form").html("<h1>You are " + combo + "!</h1> <p>" + combos["W"] + ": " + colors["W"] + "</p>" +"<p>" + combos["U"] + ": " + colors["U"] + "</p>" +"<p>" + combos["B"] + ": " + colors["B"] + "</p>" +"<p>" + combos["R"] + ": " + colors["R"] + "</p>" +"<p>" + combos["G"] + ": " + colors["G"] + "</p>");
+	$("#form").html("<h2>You are " + combo + "!</h2> <p>" + combos["W"] + ": " + colors["W"] + "</p>" +"<p>" + combos["U"] + ": " + colors["U"] + "</p>" +"<p>" + combos["B"] + ": " + colors["B"] + "</p>" +"<p>" + combos["R"] + ": " + colors["R"] + "</p>" +"<p>" + combos["G"] + ": " + colors["G"] + "</p>");
 };
 
 $(document).ready(function(){
-	$("form").html(`<h1>Welcome to tier 1 of your trial!</h1>
+	$("#form").html(`<h2>Welcome to tier 1 of your trial!</h2>
 	<p>You will be presented with 40 questions, testing your colour identity. Choose one of the available options. Choose 'Ambivalent' if you both agree and disagree with the statement, and choose 'Don't Care' if you don't have an opinion on the statement.</p>
-		<input type="button" class="button" value="Start" onclick="wrap_fill()"> `)
+		<input type="button" class="btn btn-primary my-3" value="Start" onclick="wrap_fill()"> `)
 });
