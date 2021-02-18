@@ -354,6 +354,6 @@ display_results = function(){
 
 $(document).ready(function(){
 	$("#form").html(`<h2>Welcome to tier 1 of your trial!</h2>
-	<p>You will be presented with 40 questions, testing your colour identity. Choose one of the available options. Choose 'Ambivalent' if you both agree and disagree with the statement, and choose 'Don't Care' if you don't have an opinion on the statement.</p>
+	<p>You will be presented with 40 questions, testing your colour identity. Choose one of the available options. The "Ambivalent" option is for if you struggle to choose because you see both sides as right, while the "Don't Care" option is if you see the issue as too unimportant to make a choice.</p>
 		<input type="button" class="btn btn-primary my-3" value="Start" onclick="wrap_fill()"> `)
 });
