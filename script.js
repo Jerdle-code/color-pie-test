@@ -333,10 +333,10 @@ display_results = function(){
 		}
 	}n
 	var combo = combos[cols.join("")];
-	if (cols.length == 0 || cols.length == 5 || max_gap < 3){
+	if (cols.length == 0 || cols.length == 5 || col_diffs[max_gap] < 3){
 		if (cutoff < 11){
 			combo = "Colorless";
-		} else {n
+		} else {
 			combo = "WUBRG";
 		}
 	}
